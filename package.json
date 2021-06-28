@@ -1,6 +1,8 @@
 {
     "name": "openapi-generator",
     "version": "1.0.0",
+    "author": "Tomas Palsson",
+    "license": "MIT",
     "private": true,
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -9,6 +11,7 @@
         "lint": "eslint .",
         "clean": "rm -rf ./dist",
         "build": "tsc --build tsconfig.json",
+        "prepare": "yarn build",
         "start": "NODE_ENV=production ts-node start.ts",
         "start-dev": "NODE_ENV=development node_modules/.bin/ts-node-dev --exit-child --respawn --notify false --prefer-ts --ignore-watch node_modules -- start.ts"
     },
