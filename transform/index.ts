@@ -47,8 +47,6 @@ export function transformAll(schema: RootSchema, ctx: GlobalContext): string {
         }
     }
 
-    console.log(endpoints);
-
     const output: string[] = [];
     const add = (line: string) => output.push(line);
 
