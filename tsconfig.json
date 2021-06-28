@@ -1,0 +1,32 @@
+{
+	"compilerOptions": {
+		"lib": [
+			"es2020",
+			"dom"
+		],
+		"strictPropertyInitialization": false,
+		"emitDecoratorMetadata": true,
+		"strictNullChecks": true,
+		"esModuleInterop": true,
+		"experimentalDecorators": true,
+		"importHelpers": true,
+		"module": "CommonJS",
+		"outDir": "dist",
+		"removeComments": true,
+		"sourceMap": true,
+		"inlineSources": true,
+		"sourceRoot": "/",
+		"strict": true,
+		"target": "es2020",
+		"moduleResolution": "node",
+		"declaration": true,
+		"allowSyntheticDefaultImports": true,
+		"declarationMap": true,
+	},
+	"include": [
+		"."
+	],
+	"exclude": [
+		"dist"
+	]
+}
