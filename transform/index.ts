@@ -28,16 +28,28 @@ export function transformAll(schema: RootSchema, ctx: GlobalContext): string {
         const schemaEndpoints = schema.paths[path];
         for (const value of Object.values(schemaEndpoints)) {
             const schemaEndpoint: OperationObject = value;
+            if (!schemaEndpoint.operationId) {
+                continue;
+            }
             const endpoint = new Endpoint();
             endpoints.push(endpoint);
-            endpoint.path = path;
+            endpoint.path = path.replace('{', ':').replace('}', '');
             endpoint.name = _.upperFirst(schemaEndpoint.operationId);
             if(schemaEndpoint.parameters) {
                 endpoint.parameters = transformParametersArray(schemaEndpoint.parameters, schema, {...ctx});
             }
             if(schemaEndpoint.responses) {
                 const successfulResponseKey = schemaEndpoint.responses.hasOwnProperty('201') ? '201' : '200'
-                const responseSchema = (schemaEndpoint.responses[successfulResponseKey] as any)['content']['application/json']['schema'];
+                let responseSchema = (schemaEndpoint.responses[successfulResponseKey] as any)
+                if (responseSchema['content']) {
+                    responseSchema = responseSchema['content'];
+                }
+                if(responseSchema['application/json']){
+                    responseSchema = responseSchema['application/json'];
+                }
+                if(responseSchema['schema']){
+                    responseSchema = responseSchema['schema'];
+                }
                 endpoint.response = transformSchemaObj(responseSchema, transformSchemaObjOptions);
             }
             if(schemaEndpoint.requestBody){
